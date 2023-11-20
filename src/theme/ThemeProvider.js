@@ -28,7 +28,7 @@ PrimeReact.zIndex = {
 
 const GlobalStyle = createGlobalStyle`
   body {
-    color: 212121;
+    color: ${props => props.theme.colors.text};
     font-Size: 16px;
     font-family: "Trebuchet MS", Helvetica, sans-serif;
     padding: 0;
@@ -68,12 +68,14 @@ const GlobalStyle = createGlobalStyle`
 const MobileContainer = styled(Div100vh)`
   width: 100vw;
   font-size: 0.9em;
+  background: ${({theme}) => theme.colors.bg};
 `;
 
 const DesktopContainer = styled.div`
   width: 100vw;
   height: 100vh;
   font-size: 1em;
+  background: ${({theme}) => theme.colors.bg};
   @media ${device.laptop} {
     font-size: 1.2vw;
   }

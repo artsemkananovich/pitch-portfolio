@@ -1,13 +1,13 @@
 import React from 'react';
-import Main from 'pages/Main';
+import Home from 'pages/Home';
 import Work from 'pages/Work';
 import Project from 'pages/Work/Project';
 
 export const PrimaryRoutes = [
   {
     path: '/',
-    title: 'Main',
-    element: <Main />,
+    title: 'Home',
+    element: <Home />,
     children: null,
   },
   {

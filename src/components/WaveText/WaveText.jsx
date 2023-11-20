@@ -1,11 +1,12 @@
 import React from 'react';
 import {motion} from 'framer-motion';
+import styled from 'styled-components';
 
 const WaveText = ({
   text = 'Wave Text',
   delay = 0,
   duration = 0.05,
-  replay,
+  replay = true,
   ...props
 }) => {
   const letters = Array.from(text);
@@ -42,8 +43,7 @@ const WaveText = ({
   };
 
   return (
-    <motion.p
-      style={{display: 'flex', overflow: 'hidden'}}
+    <Holder
       variants={container}
       initial="hidden"
       animate={replay ? 'visible' : 'hidden'}
@@ -54,8 +54,20 @@ const WaveText = ({
           {letter === ' ' ? '\u00A0' : letter}
         </motion.span>
       ))}
-    </motion.p>
+    </Holder>
   );
 };
+
+const Holder = styled(motion.p)`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  > span {
+    line-height: 1.2;
+  }
+`;
 
 export default WaveText;

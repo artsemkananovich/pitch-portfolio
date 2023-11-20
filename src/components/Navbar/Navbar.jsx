@@ -32,9 +32,9 @@ export default function Navbar() {
                 {menuVisible && (
                   <NavMobile
                     transition={{duration: 0.4}}
-                    initial={{x: '-100%'}}
+                    initial={{x: '100%'}}
                     animate={{x: 0}}
-                    exit={{x: '-100%'}}
+                    exit={{x: '100%'}}
                   >
                     <CloseButton
                       icon="pi pi-times"
@@ -63,13 +63,18 @@ export default function Navbar() {
             </>
           ) : (
             <Nav>
-              {PrimaryRoutes.map(route => (
-                <NavItemDesktop
-                  key={`desktop-nav-item-${route.path}`}
-                  path={route.path}
-                  title={route.title}
-                />
-              ))}
+              {PrimaryRoutes.map(route => {
+                if (route.path === '/') {
+                  return null;
+                }
+                return (
+                  <NavItemDesktop
+                    key={`desktop-nav-item-${route.path}`}
+                    path={route.path}
+                    title={route.title}
+                  />
+                );
+              })}
             </Nav>
           )}
         </FlexHolder>
@@ -84,7 +89,7 @@ const Holder = styled.header`
   left: 0;
   z-index: 9999;
   width: inherit;
-  background-color: #212121;
+  background: ${props => props.theme.colors.bg};
 `;
 
 const FlexHolder = styled.div`
@@ -95,8 +100,6 @@ const FlexHolder = styled.div`
   align-items: center;
   padding: 2.5em 0;
   @media ${device.pad} {
-    flex-direction: row-reverse;
-    justify-content: flex-end;
     gap: 1em;
   }
 `;
@@ -115,7 +118,7 @@ const Nav = styled.ul`
 const NavItem = styled.li`
   color: ${props => (props.active ? '#fff' : '#cccccc')};
   font-weight: 900;
-  font-size: 1em;
+  font-size: 1.2em;
   line-height: 1;
   position: relative;
   cursor: pointer;
@@ -154,15 +157,15 @@ const NavMobile = styled(motion.nav)`
   position: fixed;
   z-index: 1;
   top: 0;
-  left: 0;
-  right: 30%;
+  left: 30%;
+  right: 0;
   bottom: 0;
   padding: 2em 1em 2em 0;
-  background-color: #212121;
+  background: ${props => props.theme.colors.text};
   box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.75);
 `;
 const NavItemMobile = styled.div`
-  color: ${({selected}) => (selected ? '#f2f2f2' : '#7B8694')};
+  color: ${props => props.theme.colors.bg};
   font-weight: ${({selected}) => (selected ? 700 : 100)};
   font-size: 1.5em;
   width: 100%;
